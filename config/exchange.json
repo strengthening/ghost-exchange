@@ -1,0 +1,14 @@
+{
+  "okex": {
+    "base_url": "https://www.okex.com",
+    "retry_time": 3,
+    "api_key": "",
+    "secret_key": ""
+  },
+  "hbpro": {
+    "base_url": "https://www.okex.com",
+    "retry_time": 3,
+    "api_key": "",
+    "secret_key": ""
+  }
+}

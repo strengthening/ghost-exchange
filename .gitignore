@@ -1,5 +1,4 @@
 node_modules/
 .idea/
-test/
 config/config.json
 package-lock.json

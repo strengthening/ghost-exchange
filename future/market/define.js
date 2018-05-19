@@ -1,7 +1,7 @@
 const C = require('../../constant/define');
 
 const time = require('../../time/define');
-const defaultConf = require('../../config/exchange.json');
+const defaultConf = require('../../config/config.json');
 
 const FutureMarketOkex = require('./okex');
 
@@ -60,7 +60,7 @@ class FutureMarket {
   }
 
   history(symbol, exchange, dueTimestamp, since) {
-    const dateFmt = time.timestamp.string(dueTimestamp, C.DATE_STANDARD_FORMAT);
+    const dateFmt = time.string(dueTimestamp, C.DATE_STANDARD_FORMAT);
     if (exchange === C.EXCHANGE_OKEX) {
       return this.okex.history(symbol, dateFmt, since);
     }

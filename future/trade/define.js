@@ -1,6 +1,6 @@
 const C = require('../../constant/define');
 
-const defaultConf = require('../../config/exchange.json');
+const defaultConf = require('../../config/config.json');
 
 const FutureTradeOkex = require('./okex');
 
@@ -35,13 +35,6 @@ class FutureTrade {
       return this.okex.cancel(symbol, contractType, orderId);
     }
     return this.okex.cancel(symbol, contractType, orderId);
-  }
-
-  cancelOrderInfo(symbol, exchange, contractType, orderId) {
-    if (exchange === C.EXCHANGE_OKEX) {
-      return this.okex.cancelOrderInfo(symbol, contractType, orderId);
-    }
-    return this.okex.cancelOrderInfo(symbol, contractType, orderId);
   }
 
   openLong(symbol, exchange, contractType, amount, price, leverRate) {

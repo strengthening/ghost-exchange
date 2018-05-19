@@ -232,7 +232,7 @@ class FutureMarketOkex {
       since,
       api_key: this.config.api_key,
     }, this.config.secret_key);
-    const dueTimestamp = time.timestamp.parse(date, C.DATE_STANDARD_FORMAT) + (16 * 60 * 60 * 1000);
+    const dueTimestamp = time.parse(date, C.DATE_STANDARD_FORMAT) + (16 * 60 * 60 * 1000);
     return new Promise((resolve) => {
       let lastErr = E.ERR_HTTP_RETRY_OUT;
       let retryTime = 0;

@@ -1,8 +1,6 @@
 const C = require('../../constant/define');
-
 const time = require('../../time/define');
 const defaultConf = require('../../config/config.json');
-
 const FutureMarketOkex = require('./okex');
 
 class FutureMarket {

@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const C = require('../../constant/define');
+const time = require('../../time/define');
 const http = require('../../http/define');
 
 class FutureTradeOkex {
@@ -45,22 +46,39 @@ class FutureTradeOkex {
   }
 
   cancel(symbol, contractType, orderId) {
-    return new Promise(async (resolve) => {
-      const param = FutureTradeOkex.sign({
-        symbol,
-        contract_type: contractType,
-        order_id: orderId,
-        api_key: this.config.api_key,
-      }, this.config.secret_key);
+    const param = FutureTradeOkex.sign({
+      symbol,
+      contract_type: contractType,
+      order_id: orderId,
+      api_key: this.config.api_key,
+    }, this.config.secret_key);
 
-      http.post(`${this.config.base_url}/api/v1/future_cancel.do`, param)
-        .then((dataStr) => {
-          const dataObj = JSON.parse(dataStr);
-          if (dataObj.result) return resolve([dataObj, undefined]);
-          return resolve([undefined, dataStr]);
-        }, (err) => {
-          resolve([undefined, err]);
-        });
+    return new Promise((resolve) => {
+      let retryTime = 0;
+      const inner = () => {
+        retryTime += 1;
+        http.post(`${this.config.base_url}/api/v1/future_cancel.do`, param)
+          .then(async (dataStr) => {
+            const dataObj = JSON.parse(dataStr);
+            if (dataObj.result) {
+              return resolve([dataObj, undefined]);
+            }
+            // the order haved dealed
+            if (!dataObj.result && dataObj.error_code === 20015) {
+              return resolve([{ result: true, order_id: orderId }, undefined]);
+            }
+            // cancel order is to freq so retry sometime, or cancel to quick retry
+            if (!dataObj.result && retryTime < this.config.retry_time &&
+              (dataObj.error_code === 20049 || dataObj.error_code === 20014)) {
+              await time.delay(5 * time.SECOND);
+              inner();
+            }
+            return resolve([undefined, dataStr]);
+          }, (err) => {
+            resolve([undefined, err]);
+          });
+      };
+      inner();
     });
   }
 

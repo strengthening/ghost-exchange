@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const C = require('../../constant/define');
+const E = require('../../error/define');
 const time = require('../../time/define');
 const http = require('../../http/define');
 
@@ -64,12 +65,13 @@ class FutureTradeOkex {
               return resolve([dataObj, undefined]);
             }
             // the order haved dealed
-            if (!dataObj.result && dataObj.error_code === 20015) {
+            if (!dataObj.result && dataObj.error_code === E.OKEX.FUTURE.ERR_ORDER_NOT_EXIST) {
               return resolve([{ result: true, order_id: orderId }, undefined]);
             }
             // cancel order is to freq so retry sometime, or cancel to quick retry
             if (!dataObj.result && retryTime < this.config.retry_time &&
-              (dataObj.error_code === 20049 || dataObj.error_code === 20014)) {
+              (dataObj.error_code === E.OKEX.FUTURE.ERR_REQUEST_TOO_FREQUENCY ||
+                dataObj.error_code === E.OKEX.FUTURE.ERR_SYSTEM_ERROR)) {
               await time.delay(5 * time.SECOND);
               inner();
             }

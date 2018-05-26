@@ -1,5 +1,5 @@
 const C = require('../../constant/define');
-const defaultConf = require('../../config/config.json.example');
+const defaultConf = require('../../config/config.example.json');
 const FutureTradeOkex = require('./okex');
 
 class FutureTrade {

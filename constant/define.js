@@ -1,3 +1,5 @@
+const okex = require('./okex');
+
 module.exports = {
   SYMBOL_BTC_USD: 'btc_usd',
   SYMBOL_ETH_USD: 'eth_usd',
@@ -61,4 +63,6 @@ module.exports = {
 
   KLINE_TYPE_DAY_KLINE: '1day',
   KLINE_TYPE_MIN_KLINE: '1min',
+
+  OKEX: okex,
 };

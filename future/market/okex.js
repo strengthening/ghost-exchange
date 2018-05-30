@@ -27,7 +27,7 @@ class FutureMarketOkex {
         }, (err) => {
           if (retryTime <= this.config.retry_time) {
             lastErr = err;
-            inner();
+            return inner();
           }
           return resolve([undefined, lastErr]);
         });
@@ -61,7 +61,7 @@ class FutureMarketOkex {
         }, (err) => {
           if (retryTime <= this.config.retry_time) {
             lastErr = err;
-            inner();
+            return inner();
           }
           return resolve([undefined, lastErr]);
         });
@@ -98,7 +98,7 @@ class FutureMarketOkex {
         }, (err) => {
           if (retryTime <= this.config.retry_time) {
             lastErr = err;
-            inner();
+            return inner();
           }
           return resolve([undefined, lastErr]);
         });
@@ -129,7 +129,7 @@ class FutureMarketOkex {
         }, (err) => {
           if (retryTime <= this.config.retry_time) {
             lastErr = err;
-            inner();
+            return inner();
           }
           return resolve([undefined, lastErr]);
         });
@@ -160,7 +160,7 @@ class FutureMarketOkex {
         }, (err) => {
           if (retryTime <= this.config.retry_time) {
             lastErr = err;
-            inner();
+            return inner();
           }
           return resolve([undefined, lastErr]);
         });
@@ -191,7 +191,7 @@ class FutureMarketOkex {
         }, (err) => {
           if (retryTime <= this.config.retry_time) {
             lastErr = err;
-            inner();
+            return inner();
           }
           return resolve([undefined, lastErr]);
         });
@@ -216,7 +216,7 @@ class FutureMarketOkex {
         }, (err) => {
           if (retryTime <= this.config.retry_time) {
             lastErr = err;
-            inner();
+            return inner();
           }
           return resolve([undefined, lastErr]);
         });
@@ -254,7 +254,7 @@ class FutureMarketOkex {
         }, (err) => {
           if (retryTime <= this.config.retry_time) {
             lastErr = err;
-            inner();
+            return inner();
           }
           return resolve([undefined, lastErr]);
         });

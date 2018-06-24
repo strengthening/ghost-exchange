@@ -23,6 +23,11 @@ class FutureMarketOkex {
           if (dataObj.result !== undefined && !dataObj.result) {
             return resolve([undefined, dataStr]);
           }
+          if (dataObj.ticker && dataObj.ticker.contract_id) {
+            dataObj.ticker.due_timestamp =
+              time.parse(dataObj.ticker.contract_id, C.DATE_SHORT_FORMAT) +
+              (16 * time.HOUR);
+          }
           return resolve([dataObj, undefined]);
         }, (err) => {
           if (retryTime <= this.config.retry_time) {

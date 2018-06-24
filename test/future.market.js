@@ -5,7 +5,7 @@ const config = require('../config/config.json');
 const { FutureMarket } = require('../future/define');
 
 const futureMarket = new FutureMarket(config);
-const testSwitch = [true, true, true, true, true, true, true];
+const testSwitch = [true, false, false, false, false, false, false];
 
 let testStart = -1;
 
@@ -123,7 +123,7 @@ describe('future', () => {
         (async () => {
           const [limit, limitErr] = await futureMarket.limit(
             C.SYMBOL_BTC_USD, C.EXCHANGE_OKEX,
-            C.CONTRACT_TYPE_OKEX_QUARTER
+            C.CONTRACT_TYPE_OKEX_QUARTER,
           );
           assert.equal(limitErr, undefined);
           console.log(JSON.stringify(limit));

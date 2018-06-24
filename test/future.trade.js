@@ -4,7 +4,7 @@ const C = require('../constant/define');
 const config = require('../config/config.json');
 const { FutureTrade, FutureMarket } = require('../future/define');
 
-const testSwitch = [true, true, true, true, true, true, true];
+const testSwitch = [true, false, false, false, false, false, false];
 const futureTrade = new FutureTrade(config);
 const futureMarket = new FutureMarket(config);
 

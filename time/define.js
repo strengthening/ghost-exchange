@@ -102,8 +102,8 @@ function delay(interval) {
       i = 0;
     }
 
-    setTimeout(() => {
-      resolve();
+    setTimeout(function() {
+      return resolve();
     }, i);
   });
 }
